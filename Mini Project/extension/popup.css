@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Refined color palette for a professional look */
+  --primary-color: #6d5ed3; /* Deeper, elegant purple */
+  --accent-color: #f0abfc; /* Soft magenta for accents */
+  --success-color: #10b981; /* Rich emerald green */
+  --danger-color: #f43f5e; /* Vibrant rose red */
+
+  /* Glassmorphism variables for a polished feel */
+  --bg-start: #e0e7ff; /* Lavender blue */
+  --bg-end: #fce7f3;   /* Soft pink */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px 0 rgba(109, 94, 211, 0.15);
+  --glass-blur: 15px;
+
+  --text-primary: #1f2937; /* Dark grey for high contrast */
+  --text-secondary: #6b7280; /* Lighter grey for secondary text */
+  --text-on-primary: #ffffff; /* White text for buttons/badges */
+
+  --radius-l: 20px; /* Main container rounding */
+  --radius-m: 12px; /* Card rounding */
+  --radius-s: 8px;  /* Button/badge rounding */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  width: 360px; /* The width of the extension */
+  height: 580px; /* The vertical length of the extension */
+  margin: 0;
+  background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  color: var(--text-primary);
+  overflow: hidden; /* Prevent the body itself from showing scrollbars */
+  position: relative;
+}
+
+/* Decorative background shapes for a polished look */
+.bg-shape1, .bg-shape2 {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.6;
+}
+.bg-shape1 {
+  width: 200px;
+  height: 200px;
+  top: -50px;
+  left: -60px;
+  background: #c7d2fe;
+}
+.bg-shape2 {
+  width: 250px;
+  height: 250px;
+  bottom: -80px;
+  right: -100px;
+  background: #fbcfe8;
+}
+
+.container {
+  padding: 24px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-l);
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Make the container fill the new body height */
+  box-sizing: border-box;
+}
+
+/* --- Header --- */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+.logo {
+  width: 48px;
+  height: 48px;
+}
+h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+/* --- Main Content Layout --- */
+.main-content {
+  flex-grow: 1; /* Allow main content to fill available space */
+  overflow-y: auto; /* Make this area scrollable if content overflows */
+  /* Add a little padding to prevent scrollbar from touching content */
+  padding-right: 12px;
+  margin-right: -12px;
+  /* Align content to the top in the scrollable area */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+}
+
+/* --- Initial View & Product Info --- */
+.product-info {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-m);
+  border: 1px solid var(--glass-border);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* --- Primary Button --- */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background-image: linear-gradient(to right, #8b5cf6, #6d5ed3);
+  color: var(--text-on-primary);
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 15px rgba(109, 94, 211, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(109, 94, 211, 0.4);
+}
+.btn-primary svg {
+  stroke: var(--text-on-primary);
+}
+
+/* --- Loader / Spinner View --- */
+.loader-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  gap: 16px;
+  color: var(--text-secondary);
+}
+.spinner {
+  border: 4px solid rgba(109, 94, 211, 0.2);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- Results View --- */
+.result-view {
+  animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.summary-card {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 16px;
+  border-radius: var(--radius-m);
+  margin-bottom: 20px;
+  border: 1px solid var(--glass-border);
+}
+.one-line-summary {
+  font-weight: 600;
+  font-size: 15px;
+  margin: 0 0 16px 0;
+  line-height: 1.6;
+}
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.badge {
+  padding: 6px 12px;
+  border-radius: var(--radius-s);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+.badge.sentiment {
+  background: var(--primary-color);
+  color: var(--text-on-primary);
+}
+.badge.score {
+  background: var(--accent-color);
+  color: var(--text-primary);
+}
+
+/* --- Pros & Cons Grid --- */
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.col {
+  background: rgba(255, 255, 255, 0.4);
+  padding: 16px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--glass-border);
+}
+.col h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.col.pros h4 { color: var(--success-color); }
+.col.cons h4 { color: var(--danger-color); }
+.col ul {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.col li {
+  margin-bottom: 8px;
+}
+.col li:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Error View --- */
+.error-view {
+  background: #fff1f2; /* Soft red background */
+  padding: 16px;
+  border-radius: var(--radius-m);
+  font-size: 14px;
+  color: var(--danger-color);
+  border: 1px solid #fecdd3;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* --- Footer --- */
+.footer {
+  flex-shrink: 0; /* Prevent footer from shrinking */
+  padding-top: 20px;
+  border-top: 1px solid var(--glass-border);
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* --- Utility --- */
+.hidden {
+  display: none !important;
+}
